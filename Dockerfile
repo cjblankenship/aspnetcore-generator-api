@@ -18,7 +18,7 @@ COPY . .
 # build and test from test project only
 # since the test project includes the api project, it will build it
 # if fails then we'll stop before publishing and running
-ENV TEAMCITY_PROJECT_NAME=fake
+ENV TEAMCITY_PROJECT_NAME=AspnetcoreGeneratorApi
 RUN dotnet test tests/tests.csproj
 
 # publish the api project only
