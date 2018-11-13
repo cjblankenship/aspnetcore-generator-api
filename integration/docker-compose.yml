@@ -1,8 +1,15 @@
 version: '3.1'
 
+# NOTE 1: env vars can be assigned a default value with the ${var-default} format
+# e.g. ${GENERATOR_BUILD_NUMBER-10} assigns the default value of 10 to the
+#      env var GENERATOR_BUILD_NUMBER if it isn't already set
+# 
+# NOTE 2: you can also add an environment: section but it won't set a default value
+
+
 services:
   generator:
-    image: my-registry:55000/gen:ci-14
+    image: my-registry:55000/gen:ci-${GENERATOR_BUILD_NUMBER-10}
     # port mapping is not needed if you just want to run the tests within the containers
     # and not access them yourself through the browser on your local machine
     ports:
@@ -14,5 +21,7 @@ services:
     ports:
       - "8025:8025"
   integration:
-    image: my-registry:55000/gen:integration-14
+    image: my-registry:55000/gen:integration-${BUILD_NUMBER-10}
     build: .
+    environment:
+      - TEAMCITY_PROJECT_NAME
