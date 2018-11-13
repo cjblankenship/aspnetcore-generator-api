@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  generator:
+    image: my-registry:55000/gen:ci-14
+    # port mapping is not needed if you just want to run the tests within the containers
+    # and not access them yourself through the browser on your local machine
+    ports:
+      - "8080:80"
+  mail:
+    image: mailhog/mailhog
+    # port mapping is not needed if you just want to run the tests within the containers
+    # and not access them yourself through the browser on your local machine
+    ports:
+      - "8025:8025"
+  integration:
+    image: my-registry:55000/gen:integration-14
+    build: .
