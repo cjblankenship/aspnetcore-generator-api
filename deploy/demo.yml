@@ -1,0 +1,19 @@
+version: '3.1'
+
+# NOTE 1: env vars can be assigned a default value with the ${var-default} format
+# e.g. ${GENERATOR_BUILD_NUMBER-10} assigns the default value of 10 to the
+#      env var GENERATOR_BUILD_NUMBER if it isn't already set
+# 
+# NOTE 2: you can also add an environment: section but it won't set a default value
+
+
+services:
+  generator:
+    image: my-registry:55000/gen:ci-${GENERATOR_BUILD_NUMBER-10}
+    ports:
+      - "8080:80"
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - "8081:8025"
+
