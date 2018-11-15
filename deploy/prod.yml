@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.3'
 
 # NOTE 1: env vars can be assigned a default value with the ${var-default} format
 # e.g. ${GENERATOR_BUILD_NUMBER-10} assigns the default value of 10 to the
@@ -9,8 +9,28 @@ version: '3.1'
 
 services:
   generator:
-    image: my-registry:55000/gen:ci-${GENERATOR_BUILD_NUMBER-10}
+    image: my-registry:55000/gen:ci-${GENERATOR_BUILD_NUMBER-14}
     ports:
       - "${PORT_GENERATOR-80}:80"
+    environment:
+      MAILSERVER__HOST: enter_prod_server
+      MAILSERVER__PORT: 25
+
+    # indicate that config info for this service
+    # is defined below under in the 'produappsettings'
+    # section of the 'configs' block below
+    # also specify where the specified config file
+    # should be copied to in the services container
+    # and the name that the app expects
+    configs:
+      - source: prodappsettings
+        target: /publish/appsettings.json
+
+# ===================================================
+# define any configs specified in the above services
+# ===================================================
+configs:
+  prodappsettings:
+    file: ./prodappsettings.json
  
 
