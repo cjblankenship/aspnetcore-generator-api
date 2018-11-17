@@ -29,6 +29,11 @@ RUN dotnet publish api/api.csproj -o /publish
 # ===================
 # Runtime Tests Stage
 # ===================
+# create a new container
+# copy the published app from the
+# /publish dir in the previous container stage
+# execute the app when the image is executed
+# 
 FROM microsoft/dotnet:2.1-sdk
 COPY --from=build-env /publish /publish
 WORKDIR /publish

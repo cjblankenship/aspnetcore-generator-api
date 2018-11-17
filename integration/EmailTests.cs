@@ -43,8 +43,6 @@ namespace integration
                 var content = await response.Content.ReadAsStringAsync();
                 var messages = JObject.Parse(content);
                 messages.Should().HaveElement("total").Which.Should().BeEquivalentTo(1);
-                // Deprecated syntax
-                // messages.Should().HaveElement("total").Which.Should().Be(1);
                 messages.Should().HaveElement("items")
                     .Which.Should().BeOfType<JArray>()
                     .Which.First.Should().HaveElement("Raw")
