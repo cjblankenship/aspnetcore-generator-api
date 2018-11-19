@@ -10,7 +10,7 @@ services:
     ports:
       - "8080:80" # in the event that you want to manually test the site
     environment:
-      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT-Production}
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT-Development}
 
   # grab an existing linux os image that has curl installed from Docker Hub
   # make the contents of our current dir available to the container as the /perf dir
