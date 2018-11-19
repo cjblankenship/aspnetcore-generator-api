@@ -1,11 +1,18 @@
 version: "3"
 
 services:
+  # name our image perf-web
+  # build the Dockerfile in the current dir
+  # expose it on the local host port 8080 so you can look at it if you like
   web:
     image: perf-web
     build: .
     ports:
       - "8080:80" # in the event that you want to manually test the site
+
+  # grab an existing linux os image that has curl installed from Docker Hub
+  # make the contents of our current dir available to the container as the /perf dir
+  # execute our the  performance testing bash script in the container
   testing:
     image: buildpack-deps:curl 
     volumes:
